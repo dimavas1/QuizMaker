@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuizMaker
 {
@@ -16,6 +12,8 @@ namespace QuizMaker
         /// <returns>Key selected by user</returns>
         public static int PrintQuestionAndGetAnswer(QnA question)
         {
+            
+            Console.Clear();
             Console.WriteLine(question.Question);
             Console.WriteLine("Select your unswer:");
 
@@ -24,7 +22,7 @@ namespace QuizMaker
                 Console.WriteLine($"{i+1}.  {question.Answers[i]}");
             }
 
-            return ConsoleKeyInfoToQuestionIndex(Console.ReadKey());
+            return ConsoleKeyInfoToQuestionIndex(Console.ReadKey(), question.Answers.Count);
         }
 
         /// <summary>
@@ -38,7 +36,7 @@ namespace QuizMaker
         /// 2 for third answer 
         /// 3 for fourth answer 
         /// </returns>
-        public static int ConsoleKeyInfoToQuestionIndex(ConsoleKeyInfo key)
+        public static int ConsoleKeyInfoToQuestionIndex(ConsoleKeyInfo key, int total)
         {
             int questionIndex = -1;
 
@@ -53,11 +51,17 @@ namespace QuizMaker
                     break;
                 
                 case ConsoleKey.D3:
-                    questionIndex = 2;
+                    if (total == 3)
+                    {
+                        questionIndex = 2;
+                    }                    
                     break;
                 
                 case ConsoleKey.D4:
-                    questionIndex = 3;
+                    if (total == 4)
+                    {
+                        questionIndex = 3;
+                    }
                     break;
 
             }
@@ -65,9 +69,39 @@ namespace QuizMaker
             return questionIndex;
         }
 
+        /// <summary>
+        /// Print read file error message
+        /// </summary>
         public static void PrintErrorToReadTheFile()
         {
             Console.WriteLine("Cant Read the questions file!");
+        }
+
+        /// <summary>
+        /// Printig game summary and asking user if he want to continue.
+        /// </summary>
+        /// <param name="correct">number of correct answers</param>
+        /// <param name="wrong">number of wrong answers</param>
+        /// <returns>
+        /// True if user selected Y to continue play
+        /// False if user selected any other key
+        /// </returns>
+        public static bool PrintContinuePlay(int correct,int wrong)
+        {
+            bool play = false;
+
+            Console.Clear();
+            Console.WriteLine($"You have answered {correct + wrong} questions.");
+            Console.WriteLine($"Correct answers - {correct}");
+            Console.WriteLine($"Wrong answers - {wrong}");
+            Console.WriteLine("Do you want to continue playing Type Y if yes or any key for not");
+
+            if (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                play = true;
+            }
+
+            return play;
         }
         
     }
