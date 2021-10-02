@@ -75,17 +75,16 @@ public class Data
     /// <summary>
     /// Generating list with uniq numbers 
     /// </summary>
-    /// <param name="questions">List of Questions objects</param>
-    /// <returns></returns>
-    public static HashSet<int> GetRundomQuestionsNumbering(List<QnA> questions)
+    /// <param name="numberOfquestios">number of questios</param>
+    /// <returns>None repeatable list with random numbers</returns>
+    public static HashSet<int> GenerateRandomNonRepeatingList(int numberOfquestios)
     {
-        int questionsCount = questions.Count;
         Random rnd = new();
         HashSet<int> numbers = new();
 
-        while (numbers.Count < questionsCount)
+        while (numbers.Count < numberOfquestios)
         {
-            numbers.Add(rnd.Next(0, questionsCount));
+            numbers.Add(rnd.Next(0, numberOfquestios));
         }
 
         return numbers;

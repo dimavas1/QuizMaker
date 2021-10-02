@@ -15,7 +15,7 @@ namespace QuizMaker
                 int correctCount = 0;
                 int wrongCount = 0;
                 List<QnA> qnaQuestions = Data.GetQuestionsFromArray(questions);
-                HashSet<int> listofIndexes = Data.GetRundomQuestionsNumbering(qnaQuestions);
+                HashSet<int> listofIndexes = Data.GenerateRandomNonRepeatingList(qnaQuestions.Count);
 
                 foreach (var index in listofIndexes)
                 {
