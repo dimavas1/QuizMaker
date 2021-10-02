@@ -7,19 +7,40 @@ public class Data
 {
 
     /// <summary>
-    /// Reading the Question and adding questions and answers into List of QnA objects
+    /// Trying to Read the text file.
     /// </summary>
-    /// <param name="filepath">Path and name of text file with questions</param>
+    /// <param name="filepath">selected file path</param>
+    /// <returns>
+    /// if succeded returnig an array if not returning null
+    /// </returns>
+    public static string[] GetQuestionsFromTextFile(string filepath)
+    {
+        string[] textlines = null;
+
+        try
+        {
+            textlines = File.ReadAllLines(filepath);
+        }
+        catch (Exception)
+        {
+           
+        }
+
+        return textlines;
+    }
+
+    /// <summary>
+    /// Reading the Question from array and adding questions and answers into List of QnA objects
+    /// </summary>
+    /// <param name="textlines">selected array</param>
     /// <returns>List of QnA objects
     /// Question stored Question
     /// Answers - wrong answers
     /// CorrectAnswers - correct answers
     /// </returns>
-    public static List<QnA> GetQuestionsFromTextFile(string filepath)
+    public static List<QnA> GetQuestionsFromArray(string[] textlines)
     {
         List<QnA> questions = new();
-
-        string[] textlines = File.ReadAllLines(filepath);
         int count = 0;
 
         foreach (var line in textlines)
@@ -29,7 +50,6 @@ public class Data
             QnA question = new();
             var lineArray = line.Split("?");
             question.Question = lineArray[0].Trim() + "?";
-            string temp = "";
 
             foreach (string answer in lineArray[1].Split("|"))
             {
@@ -71,6 +91,24 @@ public class Data
         return numbers;
     }
 
+    /// <summary>
+    /// Verify if user answer is correct
+    /// </summary>
+    /// <param name="question">selected question object</param>
+    /// <param name="answerIndex">answer index(0 to 3)</param>
+    /// <returns></returns>
+    public static bool IsItCorrectAnswer(QnA question, int answerIndex)
+    {
+        bool correctAnswer = false;
 
+        foreach (string answer in question.CorrectAnswers)
+        {
+            if (answer == question.Answers[answerIndex])
+            {
+                correctAnswer = true;
+            }
+        }
+        return correctAnswer;
+    }
 
 }

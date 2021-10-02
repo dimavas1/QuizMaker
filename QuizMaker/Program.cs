@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace QuizMaker
 {
@@ -6,8 +7,24 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {            
-            var questions =  Data.GetQuestionsFromTextFile(@"C:\Tranning\QuizMaker\Input File\QuizList.txt");
-            var lisofIndexes = Data.GetRundomQuestionsNumbering(questions);
+            string[] questions =  Data.GetQuestionsFromTextFile(@"..\..\..\..\Input File\QuizList.txt");
+
+            if (questions!=null)
+            {
+                int correctCount = 0;
+                int wrongCount = 0;
+                List<QnA> qnaQuestions = Data.GetQuestionsFromArray(questions);
+                HashSet<int> listofIndexes = Data.GetRundomQuestionsNumbering(qnaQuestions);
+            }
+            else
+            {
+                UI.PrintErrorToReadTheFile();
+            }
+
+
+            
         }
+
+       
     }
 }
