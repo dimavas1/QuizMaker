@@ -38,14 +38,14 @@ namespace QuizMaker
                         }
                     }
 
-                    if (( correctCount + wrongCount) < listofIndexes.Count)
+                    if ((correctCount + wrongCount) < listofIndexes.Count)
                     {
                         if (!UI.PrintContinuePlay(correctCount, wrongCount))
                         {
                             break;
                         }
                     }
-                   
+
                 }
             }
             else
