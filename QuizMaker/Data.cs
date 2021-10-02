@@ -110,4 +110,25 @@ public class Data
         return correctAnswer;
     }
 
+    /// <summary>
+    /// Getting questions from file and loading to QnA list object
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <returns>
+    /// Loaded QnA list object if succeded to read from file, if not return null
+    /// </returns>
+    public static List<QnA> LoadQuestionList(string filePath)
+    {
+        List<QnA> list = null;
+
+        string[] textlines = GetQuestionsFromTextFile(filePath);
+
+        if (textlines != null)
+        {
+            list = GetQuestionsFromArray(textlines);
+        }
+
+        return list;
+    }
+
 }
