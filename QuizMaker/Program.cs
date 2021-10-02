@@ -6,15 +6,15 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            string[] questions = Data.GetQuestionsFromTextFile(@"..\..\..\..\Input File\QuizList.txt");
+            string filePath = @"..\..\..\..\Input File\QuizList.txt";
+            List<QnA> qnaQuestions = Data.LoadQuestionList(filePath);
 
-            if (questions != null)
+            if (qnaQuestions != null)
             {
                 int answer;
                 int answerTry;
                 int correctCount = 0;
                 int wrongCount = 0;
-                List<QnA> qnaQuestions = Data.GetQuestionsFromArray(questions);
                 HashSet<int> listofIndexes = Data.GenerateRandomNonRepeatingList(qnaQuestions.Count);
 
                 foreach (var index in listofIndexes)
