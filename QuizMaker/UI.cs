@@ -9,7 +9,7 @@ namespace QuizMaker
         /// Printing all answers and asking for input from user.
         /// </summary>
         /// <param name="question">Selected question object</param>
-        /// <returns>Key selected by user</returns>
+        /// <returns>Key selected by user, -1 if invaild</returns>
         public static int PrintQuestionAndGetAnswer(QnA question)
         {
             
@@ -86,10 +86,9 @@ namespace QuizMaker
         /// True if user selected Y to continue play
         /// False if user selected any other key
         /// </returns>
-        public static bool PrintContinuePlay(int correct,int wrong)
+        public static bool AskUserToContinue(int correct,int wrong)
         {
             bool play = false;
-
             Console.Clear();
             Console.WriteLine($"You have answered {correct + wrong} questions.");
             Console.WriteLine($"Correct answers - {correct}");

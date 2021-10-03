@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuizMaker
 {
@@ -8,6 +10,12 @@ namespace QuizMaker
         {
             string filePath = @"..\..\..\..\Input File\QuizList.txt";
             List<QnA> qnaQuestions = Data.LoadQuestionList(filePath);
+
+            if(qnaQuestions == null)
+            {
+                UI.PrintErrorToReadTheFile();
+                return;
+            }
 
             if (qnaQuestions != null)
             {
@@ -40,7 +48,7 @@ namespace QuizMaker
 
                     if ((correctCount + wrongCount) < listofIndexes.Count)
                     {
-                        if (!UI.PrintContinuePlay(correctCount, wrongCount))
+                        if (!UI.AskUserToContinue(correctCount, wrongCount))
                         {
                             break;
                         }
