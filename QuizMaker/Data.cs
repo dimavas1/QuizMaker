@@ -49,24 +49,30 @@ public class Data
 
             QnA question = new();
             var lineArray = line.Split("?");
-            question.Question = lineArray[0].Trim() + "?";
 
-            foreach (string answer in lineArray[1].Split("|"))
+            if (lineArray.Length > 0)
             {
-                if (answer.Trim() != string.Empty)
+                question.Question = lineArray[0].Trim() + "?";
+
+                foreach (string answer in lineArray[1].Split("|"))
                 {
-
-                    if (answer.Contains("*"))
+                    if (answer.Trim() != string.Empty)
                     {
-                        question.CorrectAnswers.Add(answer.Trim().Replace("*", ""));
+
+                        if (answer.Contains("*"))
+                        {
+                            question.CorrectAnswers.Add(answer.Trim().Replace("*", ""));
+                        }
+
+                        question.Answers.Add(answer.Trim().Replace("*", ""));
+
                     }
-
-                    question.Answers.Add(answer.Trim().Replace("*", ""));
-
                 }
+
+                questions.Add(question);
             }
 
-            questions.Add(question);
+
         }
 
         return questions;
