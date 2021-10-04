@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Configuration;
 
 namespace QuizMaker
 {
@@ -8,7 +7,7 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            string filePath = @"..\..\..\..\Input File\QuizList.txt";
+            string filePath = ConfigurationManager.AppSettings.Get("path");
             List<QnA> qnaQuestions = Data.LoadQuestionList(filePath);
 
             if(qnaQuestions == null)
