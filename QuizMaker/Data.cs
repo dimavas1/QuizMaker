@@ -81,25 +81,7 @@ public class Data
 
         return questions;
     }
-
-    /// <summary>
-    /// Generating list with uniq numbers 
-    /// </summary>
-    /// <param name="numberOfquestios">number of questios</param>
-    /// <returns>None repeatable list with random numbers</returns>
-    public static HashSet<int> GenerateRandomNonRepeatingList(int numberOfquestios)
-    {
-        Random rnd = new();
-        HashSet<int> numbers = new();
-
-        while (numbers.Count < numberOfquestios)
-        {
-            numbers.Add(rnd.Next(0, numberOfquestios));
-        }
-
-        return numbers;
-    }
-
+  
     /// <summary>
     /// Verify if user answer is correct
     /// </summary>

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 
 namespace QuizMaker
 {
@@ -7,10 +9,11 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
+            Random rnd = new();
             string filePath = ConfigurationManager.AppSettings.Get("path");
             List<QnA> qnaQuestions = Data.LoadQuestionList(filePath);
 
-            if(qnaQuestions == null)
+            if (qnaQuestions == null)
             {
                 UI.PrintErrorToReadTheFile();
                 return;
@@ -22,20 +25,21 @@ namespace QuizMaker
                 int answerTry;
                 int correctCount = 0;
                 int wrongCount = 0;
-                HashSet<int> listofIndexes = Data.GenerateRandomNonRepeatingList(qnaQuestions.Count);
 
-                foreach (var index in listofIndexes)
+                var reorderedQuestions = qnaQuestions.OrderBy(x => rnd.Next());
+
+                foreach (var reorderedQuestion in reorderedQuestions)
                 {
                     answerTry = 0;
                     do
                     {
-                        answer = UI.PrintQuestionAndGetAnswer(qnaQuestions[index]);
+                        answer = UI.PrintQuestionAndGetAnswer(reorderedQuestion);
                         answerTry++;
                     } while (answer == -1 && answerTry < 3);
 
                     if (answerTry < 3)
                     {
-                        if (Data.IsItCorrectAnswer(qnaQuestions[index], answer))
+                        if (Data.IsItCorrectAnswer(reorderedQuestion, answer))
                         {
                             correctCount++;
                         }
@@ -45,7 +49,7 @@ namespace QuizMaker
                         }
                     }
 
-                    if ((correctCount + wrongCount) < listofIndexes.Count)
+                    if ((correctCount + wrongCount) < qnaQuestions.Count)
                     {
                         if (!UI.AskUserToContinue(correctCount, wrongCount))
                         {

@@ -52,7 +52,7 @@ namespace QuizMaker
                     break;
                 
                 case ConsoleKey.D3:
-                    if (total == 3)
+                    if (total == 3 || total == 4)
                     {
                         questionIndex = 2;
                     }                    
