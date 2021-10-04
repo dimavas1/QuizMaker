@@ -53,23 +53,27 @@ public class Data
             if (lineArray.Length > 0)
             {
                 question.Question = lineArray[0].Trim() + "?";
+                var answers = lineArray[1].Split("|");
 
-                foreach (string answer in lineArray[1].Split("|"))
+                for (int i = 0; i < answers.Length; i++)
                 {
-                    if (answer.Trim() != string.Empty)
+                    if (answers[i].Trim() != string.Empty)
                     {
-
-                        if (answer.Contains("*"))
+                        if (answers[i].Contains("*"))
                         {
-                            question.CorrectAnswers.Add(answer.Trim().Replace("*", ""));
+                            question.CorrectAnswer = i-1;
                         }
 
-                        question.Answers.Add(answer.Trim().Replace("*", ""));
+                        question.Answers.Add(answers[i].Trim().Replace("*", ""));
 
                     }
                 }
 
-                questions.Add(question);
+                if (question.CorrectAnswer != null)
+                {
+                    questions.Add(question);
+                }
+
             }
 
 
@@ -106,13 +110,11 @@ public class Data
     {
         bool correctAnswer = false;
 
-        foreach (string answer in question.CorrectAnswers)
+        if (answerIndex == question.CorrectAnswer)
         {
-            if (answer == question.Answers[answerIndex])
-            {
-                correctAnswer = true;
-            }
+            correctAnswer = true;
         }
+
         return correctAnswer;
     }
 

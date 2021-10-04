@@ -29,6 +29,7 @@ namespace QuizMaker
         /// Convert user key input to Question index
         /// </summary>
         /// <param name="key">User key inpur</param>
+        /// <param name="total">total answers</param>
         /// <returns>
         /// -1 if wrong key
         /// 0 for first answer 
