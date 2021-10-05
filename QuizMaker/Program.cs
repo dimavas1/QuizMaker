@@ -21,7 +21,7 @@ namespace QuizMaker
 
             if (qnaQuestions != null)
             {
-                int answer;
+                int? answer;
                 int answerTry;
                 int correctCount = 0;
                 int wrongCount = 0;
@@ -35,7 +35,7 @@ namespace QuizMaker
                     {
                         answer = UI.PrintQuestionAndGetAnswer(reorderedQuestion);
                         answerTry++;
-                    } while (answer == -1 && answerTry < 3);
+                    } while (answer == null && answerTry < 3);
 
                     if (answerTry < 3)
                     {

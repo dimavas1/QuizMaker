@@ -88,7 +88,7 @@ public class Data
     /// <param name="question">selected question object</param>
     /// <param name="answerIndex">answer index(0 to 3)</param>
     /// <returns></returns>
-    public static bool IsItCorrectAnswer(QnA question, int answerIndex)
+    public static bool IsItCorrectAnswer(QnA question, int? answerIndex)
     {
         bool correctAnswer = false;
 

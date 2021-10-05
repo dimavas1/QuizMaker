@@ -10,7 +10,7 @@ namespace QuizMaker
         /// </summary>
         /// <param name="question">Selected question object</param>
         /// <returns>Key selected by user, -1 if invaild</returns>
-        public static int PrintQuestionAndGetAnswer(QnA question)
+        public static int? PrintQuestionAndGetAnswer(QnA question)
         {
             
             Console.Clear();
@@ -37,7 +37,7 @@ namespace QuizMaker
         /// 2 for third answer 
         /// 3 for fourth answer 
         /// </returns>
-        public static int ConsoleKeyInfoToQuestionIndex(ConsoleKeyInfo key, int total)
+        public static int? ConsoleKeyInfoToQuestionIndex(ConsoleKeyInfo key, int total)
         {
             int questionIndex = -1;
 
@@ -67,7 +67,13 @@ namespace QuizMaker
 
             }
 
+            if (questionIndex == -1)
+            {
+                return null;
+            }
+
             return questionIndex;
+            ;
         }
 
         /// <summary>
