@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace QuizMaker
 {
+    [Serializable]
     public class QnA
     {
         public string Question { get; set; } = null;

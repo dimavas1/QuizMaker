@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 
 public class Data
 {
@@ -43,6 +44,9 @@ public class Data
         List<QnA> questions = new();
         int count = 0;
 
+        XmlSerializer xs = new(typeof(List<QnA>));
+        FileStream fsout = new("questions.xml", FileMode.Create, FileAccess.Write, FileShare.None);
+
         foreach (var line in textlines)
         {
             count++;
@@ -61,7 +65,7 @@ public class Data
                     {
                         if (answers[i].Contains("*"))
                         {
-                            question.CorrectAnswer = i-1;
+                            question.CorrectAnswer = i - 1;
                         }
 
                         question.Answers.Add(answers[i].Trim().Replace("*", ""));
@@ -75,13 +79,23 @@ public class Data
                 }
 
             }
+        }
 
-
+        try
+        {
+            using (fsout)
+            {
+                xs.Serialize(fsout, questions);
+            }
+        }
+        catch
+        {
+            Console.WriteLine($"Error by storring the questions");
         }
 
         return questions;
     }
-  
+
     /// <summary>
     /// Verify if user answer is correct
     /// </summary>
