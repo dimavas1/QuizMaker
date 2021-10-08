@@ -1,6 +1,7 @@
 ﻿using QuizMaker;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -45,7 +46,7 @@ public class Data
         int count = 0;
 
         XmlSerializer xs = new(typeof(List<QnA>));
-        FileStream fsout = new("questions.xml", FileMode.Create, FileAccess.Write, FileShare.None);
+        FileStream fsout = new(ConfigurationManager.AppSettings.Get("xspath"), FileMode.Create, FileAccess.Write, FileShare.None);
 
         foreach (var line in textlines)
         {
