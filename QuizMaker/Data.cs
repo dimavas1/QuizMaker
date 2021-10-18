@@ -45,9 +45,6 @@ public class Data
         List<QnA> questions = new();
         int count = 0;
 
-        XmlSerializer xs = new(typeof(List<QnA>));
-        FileStream fsout = new(ConfigurationManager.AppSettings.Get("xspath"), FileMode.Create, FileAccess.Write, FileShare.None);
-
         foreach (var line in textlines)
         {
             count++;
@@ -80,18 +77,6 @@ public class Data
                 }
 
             }
-        }
-
-        try
-        {
-            using (fsout)
-            {
-                xs.Serialize(fsout, questions);
-            }
-        }
-        catch
-        {
-            Console.WriteLine($"Error by storring the questions");
         }
 
         return questions;
@@ -134,6 +119,29 @@ public class Data
         }
 
         return list;
+    }
+
+    /// <summary>
+    /// Serialize T object in to file set in parameter file under "xspath"
+    /// </summary>
+    /// <typeparam name="T"> Generic object </typeparam>
+    /// <param name="someObject"></param>
+    public static void Serialize<T>(T someObject) where T : new()
+    {
+        XmlSerializer xs = new(typeof(T));
+        FileStream fsout = new(ConfigurationManager.AppSettings.Get("xspath"), FileMode.Create, FileAccess.Write, FileShare.None);
+
+        try
+        {
+            using (fsout)
+            {
+                xs.Serialize(fsout, someObject);
+            }
+        }
+        catch
+        {
+            Console.WriteLine($"Error by storring the questions");
+        }
     }
 
 }

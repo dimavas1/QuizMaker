@@ -13,6 +13,8 @@ namespace QuizMaker
             string filePath = ConfigurationManager.AppSettings.Get("path");
             List<QnA> qnaQuestions = Data.LoadQuestionList(filePath);
 
+            Data.Serialize(qnaQuestions);
+
             if (qnaQuestions == null)
             {
                 UI.PrintErrorToReadTheFile();
