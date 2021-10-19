@@ -12,23 +12,25 @@ namespace QuizMaker
             Random rnd = new();
             string filePath = ConfigurationManager.AppSettings.Get("path");
             List<QnA> qnaQuestions = Data.LoadQuestionList(filePath);
+            List<QnA> deserializedList = new();
 
             Data.Serialize(qnaQuestions);
+            deserializedList = Data.Desirialize<List<QnA>>();
 
-            if (qnaQuestions == null)
+            if (deserializedList == null)
             {
                 UI.PrintErrorToReadTheFile();
                 return;
             }
 
-            if (qnaQuestions != null)
+            if (deserializedList != null)
             {
                 int? answer;
                 int answerTry;
                 int correctCount = 0;
                 int wrongCount = 0;
 
-                var reorderedQuestions = qnaQuestions.OrderBy(x => rnd.Next());
+                var reorderedQuestions = deserializedList.OrderBy(x => rnd.Next());
 
                 foreach (var reorderedQuestion in reorderedQuestions)
                 {
@@ -51,7 +53,7 @@ namespace QuizMaker
                         }
                     }
 
-                    if ((correctCount + wrongCount) < qnaQuestions.Count)
+                    if ((correctCount + wrongCount) < deserializedList.Count)
                     {
                         if (!UI.AskUserToContinue(correctCount, wrongCount))
                         {

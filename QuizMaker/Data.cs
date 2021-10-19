@@ -144,4 +144,30 @@ public class Data
         }
     }
 
+    /// <summary>
+    /// Deserialize object
+    /// </summary>
+    /// <typeparam name="T"> object Type </typeparam>
+    /// <returns> Deserialized object</returns>
+    public static T Desirialize<T>() where T: new()
+    {
+
+        XmlSerializer xs = new(typeof(T));
+        FileStream fsout = new(ConfigurationManager.AppSettings.Get("xspath"), FileMode.Open, FileAccess.Read, FileShare.None);
+        T obj = new();
+
+        try
+        {
+            using (fsout)
+            {
+                obj = (T)xs.Deserialize(fsout);
+            }
+        }
+        catch
+        {
+            Console.WriteLine($"Error by retriving an object");
+        }
+
+        return obj;
+    }
 }
