@@ -23,11 +23,11 @@ public class Data
         {
             textlines = File.ReadAllLines(filepath);
         }
-        catch (Exception)
+        catch (Exception e)
         {
-
+            Console.WriteLine($"Error by getting the questions from text file: {e.Message}");
         }
-
+       
         return textlines;
     }
 
@@ -138,9 +138,9 @@ public class Data
                 xs.Serialize(fsout, someObject);
             }
         }
-        catch
+        catch(Exception e)
         {
-            Console.WriteLine($"Error by storring the questions");
+            Console.WriteLine($"Error by storring the questions: {e.Message}");
         }
     }
 
@@ -163,9 +163,9 @@ public class Data
                 obj = (T)xs.Deserialize(fsout);
             }
         }
-        catch
+        catch(Exception e)
         {
-            Console.WriteLine($"Error by retriving an object");
+            Console.WriteLine($"Error by retriving an object: {e.Message}");
         }
 
         return obj;
