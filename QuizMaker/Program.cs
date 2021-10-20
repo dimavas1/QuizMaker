@@ -43,7 +43,7 @@ namespace QuizMaker
 
                     if (answerTry < 3)
                     {
-                        if (Data.IsItCorrectAnswer(reorderedQuestion, answer))
+                        if (IsItCorrectAnswer(reorderedQuestion, answer))
                         {
                             correctCount++;
                         }
@@ -63,6 +63,24 @@ namespace QuizMaker
 
                 }
             }
+        }
+
+        /// <summary>
+        /// Verify if user answer is correct
+        /// </summary>
+        /// <param name="question">selected question object</param>
+        /// <param name="answerIndex">answer index(0 to 3)</param>
+        /// <returns></returns>
+        public static bool IsItCorrectAnswer(QnA question, int? answerIndex)
+        {
+            bool correctAnswer = false;
+
+            if (answerIndex == question.CorrectAnswer)
+            {
+                correctAnswer = true;
+            }
+
+            return correctAnswer;
         }
     }
 }

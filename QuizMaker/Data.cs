@@ -81,25 +81,7 @@ public class Data
 
         return questions;
     }
-
-    /// <summary>
-    /// Verify if user answer is correct
-    /// </summary>
-    /// <param name="question">selected question object</param>
-    /// <param name="answerIndex">answer index(0 to 3)</param>
-    /// <returns></returns>
-    public static bool IsItCorrectAnswer(QnA question, int? answerIndex)
-    {
-        bool correctAnswer = false;
-
-        if (answerIndex == question.CorrectAnswer)
-        {
-            correctAnswer = true;
-        }
-
-        return correctAnswer;
-    }
-
+   
     /// <summary>
     /// Getting questions from file and loading to QnA list object
     /// </summary>
@@ -126,7 +108,7 @@ public class Data
     /// </summary>
     /// <typeparam name="T"> Generic object </typeparam>
     /// <param name="someObject"></param>
-    public static void Serialize<T>(T someObject) where T : new()
+    public static void Serialize<T>(T someObject)
     {
         XmlSerializer xs = new(typeof(T));
         FileStream fsout = new(ConfigurationManager.AppSettings.Get("xspath"), FileMode.Create, FileAccess.Write, FileShare.None);
