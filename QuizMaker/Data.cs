@@ -13,7 +13,7 @@ public class Data
     /// </summary>
     /// <param name="filepath">selected file path</param>
     /// <returns>
-    /// if succeded returnig an array if not returning null
+    /// if succeeded returning an array if not returning null
     /// </returns>
     public static string[] GetQuestionsFromTextFile(string filepath)
     {
@@ -87,7 +87,7 @@ public class Data
     /// </summary>
     /// <param name="filePath"></param>
     /// <returns>
-    /// Loaded QnA list object if succeded to read from file, if not return null
+    /// Loaded QnA list object if succeeded to read from file, if not return null
     /// </returns>
     public static List<QnA> LoadQuestionList(string filePath)
     {
@@ -122,15 +122,15 @@ public class Data
         }
         catch(Exception e)
         {
-            Console.WriteLine($"Error by storring the questions: {e.Message}");
+            Console.WriteLine($"Error by storing the questions: {e.Message}");
         }
     }
 
     /// <summary>
-    /// Deserialize object
+    /// De-serialize object
     /// </summary>
     /// <typeparam name="T"> object Type </typeparam>
-    /// <returns> Deserialized object</returns>
+    /// <returns> De-serialized object</returns>
     public static T Desirialize<T>() where T: new()
     {
 
@@ -147,7 +147,7 @@ public class Data
         }
         catch(Exception e)
         {
-            Console.WriteLine($"Error by retriving an object: {e.Message}");
+            Console.WriteLine($"Error by retrieving an object: {e.Message}");
         }
 
         return obj;
