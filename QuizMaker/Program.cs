@@ -17,13 +17,13 @@ namespace QuizMaker
             Data.Serialize(qnaQuestions);
             deserializedList = Data.Desirialize<List<QnA>>();
 
-            if (deserializedList == null)
+            if (deserializedList.Count == 0)
             {
                 UI.PrintErrorToReadTheFile();
                 return;
             }
 
-            if (deserializedList != null)
+            if (deserializedList.Count > 0)
             {
                 int? answer;
                 int answerTry;
@@ -63,13 +63,6 @@ namespace QuizMaker
 
                 }
             }
-            else
-            {
-                UI.PrintErrorToReadTheFile();
-            }
-
-
-
         }
     }
 }
